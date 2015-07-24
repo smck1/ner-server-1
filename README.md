@@ -6,37 +6,24 @@ Server endpoint for communicating with stanford-ner server
 2. Install dependencies
 	 a. `bash install.sh` *this only works in linux*
 	or
-	 b. manually install stanford-ner from stanford.edu website place in project directory
+	 b. manually install stanford-ner from stanford.edu website place in project directory (see `install.sh` for the directory/file names - the classifier must be packed in to a single jar with the java server.)
 		and run `npm install`
-If no errors then you have set everything up correctly
+
+
+If you wish to change the default classifier, the easiest way is to do it is by editing the classifier variable in both `run.sh` and `install.sh` before running the installation script.
 
 #####START UP
 
-run these commands to start java server
+Simply run the shell script `run.sh`. The ports for the java (used by the node server) and node servers can be changed by editing the variables in the script.
 
-*THIS IS NOT THE SERVER YOU ARE COMMUNICATING WITH*
+##Defaults
 
-`cp stanford-ner-2015-01-30/stanford-ner.jar stanford-ner-2015-01-30/stanford-ner-with-classifier.jar`
+The node server defaults to port 8080 and the 'english.muc.7class.distsim.crf.ser.gz' classifier and limits the java server to 400mb of memory.
 
-`jar -uf stanford-ner-2015-01-30/stanford-ner-with-classifier.jar stanford-ner-2015-01-30/classifiers/english.all.3class.distsim.crf.ser.gz`
+If you wish to change the classifier after running the install you need to recreate the stanford-ner-with-classifier.jar with the appropriate classifier (see the commands in `install.sh` and replace the classifier name), as well as editing the classifier in `run.sh`.
 
-`java -mx2g -cp stanford-ner-2015-01-30/stanford-ner-with-classifier.jar edu.stanford.nlp.ie.NERServer -port 9191 -loadClassifier stanford-ner-2015-01-30/classifiers/english.all.3class.distsim.crf.ser.gz`
+Changing ports and memory limitations simply requires modifying the respective variables in `run.sh`.
 
-change `-port 9191` to whatever port you want the stanford-ner server to be listening on
-
-change `english.all.3class.distsim.crf.ser.gz` in `stanford-ner-2015-01-30/classifiers/english.all.3class.distsim.crf.ser.gz` to 
-
-	`english.all.3class.distsim.crf.ser.gz` 
-	or
-	`english.all.4class.distsim.crf.ser.gz` 
-	or
-	`english.all.7class.distsim.crf.ser.gz`
-
-*THIS IS THE SERVER YOU ARE COMMUNICATING WITH*
-
-`node index.js`
-
-the server defaults on port 8008, to change just run `node index.js x` where x is your port number
 
 
 ####Using ner-server
@@ -47,7 +34,7 @@ PARAMS:
 content-type = application/json
  
 	json:{
-		file:'string of text from file',				
+		text:'string of text from file',				
 		port:'port number of stanford java server, optional and defaults to using port 9191 for stanford java server'
 	}		
 	

@@ -8,7 +8,7 @@ var _ = require('underscore');
 var app = express();
 app.use(bodyParser.json({limit: '50mb'}));
 
-var port = process.argv[2] || 8008;
+var port = process.argv[2] || 8080;
 
 var server = app.listen(port, function () {
 		var host = server.address().address;
@@ -17,19 +17,16 @@ var server = app.listen(port, function () {
 
 });
 
-app.get('/', function (req, res) {
-		res.send('how dare you\n');
-});
 
 app.get('/ner', function (req, res) {
-		res.send('how dare you\n');
+		res.send('Server is running\n');
 });
 
 app.post('/ner', function(req, res) {
 		var parsed = '';
 		var nerPort = req.body.port ? req.body.port : 9191;
-		var text = req.body.file.replace(/\n+/gm, function myFunc(x){return' ';});
-		var process = spawn('java', ['-cp', 'stanford-ner-2015-01-30/stanford-ner-with-classifier.jar', 'edu.stanford.nlp.ie.NERServer' ,'-port' ,nerPort ,'-client']);
+		var text = req.body.text.replace(/\n+/gm, function myFunc(x){return' ';});
+		var process = spawn('java', ['-cp', 'stanford-ner/stanford-ner-with-classifier.jar', 'edu.stanford.nlp.ie.NERServer' ,'-port' ,nerPort ,'-client']);
 
 		//when java server returns data
 		process.stdout.on('data', function (data) {
