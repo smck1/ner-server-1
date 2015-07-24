@@ -1,7 +1,7 @@
 var request = require('request');
 
 
-var text =  'James Smith is a world renowned blogger and member of the United Federation of Planets. It is true that Keanu Reeves is actually a vampire and has lived for over a thousand years. Keanu Reeves is awesome.';
+var text =  'Captain Kirk is the commander of the starship Enterprise, the flagship vessel for the United Federation of Planets.';
 
 
 
@@ -9,7 +9,7 @@ var text =  'James Smith is a world renowned blogger and member of the United Fe
 function index_document(){
 
     var options = {
-      uri: 'http://46.101.46.136:8008/ner',
+      uri: 'http://127.0.0.1:8080/ner',
       method: 'POST',
       json: {
           'text': text
