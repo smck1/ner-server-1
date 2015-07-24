@@ -1,6 +1,9 @@
 # ner-server
 Server endpoint for communicating with stanford-ner server
 
+A node.js server acts as a front end for the stanford-ner java server, both need to be running a the same time.
+
+
 #####SET UP
 1. Have Java jdk 1.8 installed and in your path, stanford-ner requires java 1.8
 2. Install dependencies
@@ -16,7 +19,13 @@ If you wish to change the default classifier, the easiest way is to do it is by 
 
 Simply run the shell script `run.sh`. The ports for the java (used by the node server) and node servers can be changed by editing the variables in the script.
 
-##Defaults
+Logs are stored in `ner.out` for the java server and `server.out` for the node server.
+
+####Shutdown
+
+There's no clean way to do this yet, just kill the java/node processes.
+
+####Defaults
 
 The node server defaults to port 8080 and the 'english.muc.7class.distsim.crf.ser.gz' classifier and limits the java server to 400mb of memory.
 
