@@ -5,7 +5,7 @@ classifier='english.muc.7class.distsim.crf.ser.gz'
 
 npm install
 wget -O stanford-ner.zip $url
-unzip stanford-ner.zip
+unzip stanford-ner.zip -d /stanford-ner
 rm stanford-ner.zip
 
 cp stanford-ner/stanford-ner.jar stanford-ner/stanford-ner-with-classifier.jar
