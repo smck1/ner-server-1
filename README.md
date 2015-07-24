@@ -43,8 +43,8 @@ PARAMS:
 content-type = application/json
  
 	json:{
-		text:'string of text from file',				
-		port:'port number of stanford java server, optional and defaults to using port 9191 for stanford java server'
+		text:'The text to process',				
+		port:'Optional port of the java server'
 	}		
 	
 This returns
