@@ -48,7 +48,7 @@ content-type = application/json
 	}		
 	
 This returns
-example for 3class. 4class and 7class return more properties in entities
+example for 3class. 4class and 7class return more properties in entities. Duplicate entities are ignored.
 
 	entities :
 		{	

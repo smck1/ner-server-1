@@ -61,6 +61,7 @@ app.post('/ner', function(req, res) {
 
 });
 
+
 var parse = function(parsed) {
 
 		var tokenized   = parsed.split(/\s/gmi);
@@ -95,7 +96,10 @@ var parse = function(parsed) {
 										if (!entities.hasOwnProperty(prevEntity)) {
 												entities[prevEntity] = [];
 										}
-										entities[prevEntity].push(entityBuffer.join(' '));
+                                        // Add to the entity list if unique
+                                        if (!(entities[prevEntity].indexOf(entityBuffer.join(' ')) > -1)) {
+                                            entities[prevEntity].push(entityBuffer.join(' '));
+                                        }
 										// Now we set the buffer
 										entityBuffer = [];
 								}
@@ -111,7 +115,10 @@ var parse = function(parsed) {
 								if (!entities.hasOwnProperty(prevEntity)) {
 										entities[prevEntity] = [];
 								}
-								entities[prevEntity].push(entityBuffer.join(' '));
+                                // Add to the entity list if unique
+                                if (!(entities[prevEntity].indexOf(entityBuffer.join(' ')) > -1)) {
+                                    entities[prevEntity].push(entityBuffer.join(' '));
+                                }
 								// Now we set the buffer
 								entityBuffer = [];
 						}
@@ -121,4 +128,4 @@ var parse = function(parsed) {
 		}
 
 		return entities;
-}
+};
