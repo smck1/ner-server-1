@@ -7,7 +7,7 @@ A node.js server acts as a front end for the stanford-ner java server, both need
 #####SET UP
 1. Have Java jdk 1.8 installed and in your path, stanford-ner requires java 1.8
 2. Install dependencies
-	 a. `bash install.sh` *this only works in linux*
+	 a. `bash install.sh` *this only works in linux* and requires unzip to be installed. (Feel free to replace the unzip command with something else before running the script, though.)
 	or
 	 b. manually install stanford-ner from stanford.edu website place in project directory (see `install.sh` for the directory/file names - the classifier must be packed in to a single jar with the java server.)
 		and run `npm install`
