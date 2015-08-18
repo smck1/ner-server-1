@@ -17,21 +17,13 @@ If you wish to change the default classifier, the easiest way is to do it is by 
 
 #####START UP
 
-Simply run the shell script `run.sh`. The ports for the java (used by the node server) and node servers can be changed by editing the variables in the script.
-
-Logs are stored in `ner.out` for the java server and `server.out` for the node server.
-
-####Shutdown
-
-There's no clean way to do this yet, just kill the java/node processes.
+foreman start -f Procfile
 
 ####Defaults
 
 The node server defaults to port 8080 and the 'english.muc.7class.distsim.crf.ser.gz' classifier and limits the java server to 400mb of memory.
 
-If you wish to change the classifier after running the install you need to recreate the stanford-ner-with-classifier.jar with the appropriate classifier (see the commands in `install.sh` and replace the classifier name), as well as editing the classifier in `run.sh`.
-
-Changing ports and memory limitations simply requires modifying the respective variables in `run.sh`.
+This can be changed by editing the Procfile (also make sure to change the java server port in `index.sh`!)
 
 
 
@@ -41,20 +33,18 @@ POST /ner
 
 PARAMS:
 content-type = application/json
- 
+
 	json:{
-		text:'The text to process',				
+		text:'The text to process',
 		port:'Optional port of the java server'
-	}		
-	
+	}
+
 This returns
 example for 3class. 4class and 7class return more properties in entities. Duplicate entities are ignored.
 
 	entities :
-		{	
+		{
 			PERSON:'',
 			LOCATION:'',
 			ORGANIZATION:''
 		}
-
-

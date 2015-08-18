@@ -1,6 +1,6 @@
 {
   "name": "ner-server",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Server endpoint for communicating with stanford-ner server",
   "main": "index.js",
   "scripts": {
@@ -12,22 +12,16 @@
     "request": "*",
     "underscore": "1.8.3"
   },
-  "author": "Pranav Herur",
-  "license": "ISC",
-  "directories": {
-    "example": "example"
-  },
+  "author": "Sean McKeown",
+  "license": "GPLv2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PranavHerur/ner-server.git"
+    "url": "https://github.com/smck1/ner-server-1.git"
   },
   "keywords": [
     "ner",
     "keyword",
     "extraction"
   ],
-  "bugs": {
-    "url": "https://github.com/PranavHerur/ner-server/issues"
-  },
-  "homepage": "https://github.com/PranavHerur/ner-server"
+  "homepage": "https://github.com/smck1/ner-server-1"
 }

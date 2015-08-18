@@ -14,4 +14,4 @@ cp stanford-ner/stanford-ner.jar stanford-ner/stanford-ner-with-classifier.jar
 
 jar -uf stanford-ner/stanford-ner-with-classifier.jar stanford-ner/classifiers/$classifier
 
-echo "Installation complete! Run run.sh to get started."
+echo "Installation complete!"
