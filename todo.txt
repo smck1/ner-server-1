@@ -1,3 +1,2 @@
-foreman to run/stop processes (run java via node?)
 add which if statements to check if the scripts will work and prevent errors!
 https://github.com/arturadib/shelljs
