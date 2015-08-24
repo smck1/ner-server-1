@@ -26,38 +26,45 @@ app.post('/ner', function(req, res) {
 		var parsed = '';
 		var nerPort = req.body.port ? req.body.port : 9191;
 		var text = req.body.text.replace(/\n+/gm, function myFunc(x){return' ';});
-		var process = spawn('java', ['-cp', 'stanford-ner/stanford-ner-with-classifier.jar', 'edu.stanford.nlp.ie.NERServer' ,'-port' ,nerPort ,'-client']);
 
-		//when java server returns data
-		process.stdout.on('data', function (data) {
-				//ignore if 'Input' write file text to stream
-				if(String(data).indexOf('Input some text and press RETURN to NER tag it,  or just RETURN to finish.')==0){
-						process.stdin.write(text);
-						process.stdin.write('\n');
-						process.stdin.write('\n');
-						return;
-				}
-				//concat returned data
-				else if(String(data).length > 1){
-						parsed += String(data);
-						return;
-				}
-		});
+		if (text.length){
+			var process = spawn('java', ['-cp', 'stanford-ner/stanford-ner-with-classifier.jar', 'edu.stanford.nlp.ie.NERServer' ,'-port' ,nerPort ,'-client']);
 
-		process.stdin.on('endData',function (data){
-				console.log('endData: '+data);
-		})
+			//when java server returns data
+			process.stdout.on('data', function (data) {
+					//ignore if 'Input' write file text to stream
+					if(String(data).indexOf('Input some text and press RETURN to NER tag it,  or just RETURN to finish.')==0){
+							process.stdin.write(text);
+							process.stdin.write('\n');
+							process.stdin.write('\n');
+							return;
+					}
+					//concat returned data
+					else if(String(data).length > 1){
+							parsed += String(data);
+							return;
+					}
+			});
 
-		process.stderr.on('data', function (data) {
-		  console.log('stderr: ' + data);
-		});
+			process.stdin.on('endData',function (data){
+					console.log('endData: '+data, req.connection.remoteAddress);
+			});
 
-		//when process ends
-		process.on('close', function (code) {
-				console.log('stanford-ner process exited with code ' + code);
-				//return ner tags, after parsing
-				res.status(200).json({entities:parse(parsed)});
-		});
+			process.stderr.on('data', function (data) {
+			  console.log('stderr: ' + data, req.connection.remoteAddress);
+			});
+
+			//when process ends
+			process.on('close', function (code) {
+					console.log('stanford-ner process exited with code ' + code, req.connection.remoteAddress);
+					//return ner tags, after parsing
+					res.status(200).json({entities:parse(parsed)});
+			});
+		} else {
+			console.log('Error: Empty text provided!', req.connection.remoteAddress);
+			res.status(200).json({});
+		}
+
 
 });
 
